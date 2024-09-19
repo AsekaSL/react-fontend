@@ -17,7 +17,7 @@ function User() {
     }, []);
 
     const getUser = () => {
-        axios.get('http://localhost:3001/users')
+        axios.get(process.env.REACT_APP_ENDPOINT + '/users')
             .then(response => {
                 setUsers(response.data);
             })
@@ -27,7 +27,7 @@ function User() {
     };
 
     const addUser = (data) => {
-        axios.post('http://localhost:3001/createuser',data)
+        axios.post(process.env.REACT_APP_ENDPOINT + '/createuser',data)
             .then(response => {
                 getUser();
                 setIsSubmit(false);
@@ -44,7 +44,7 @@ function User() {
             name: data.name
         };
 
-        axios.put('http://localhost:3001/updateuser',payload)
+        axios.put(process.env.REACT_APP_ENDPOINT + '/updateuser',payload)
             .then(response => {
                 getUser();
                 setIsSubmit(false);
@@ -56,7 +56,7 @@ function User() {
     };
 
     const deleteUser = (data) => {
-        axios.delete(`http://localhost:3001/delete?id=${data.id}`, {id: data.id})
+        axios.delete(process.env.REACT_APP_ENDPOINT + `/delete?id=${data.id}`, {id: data.id})
             .then(response => {
                 getUser();
             })
